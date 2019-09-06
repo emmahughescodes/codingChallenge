@@ -1,26 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import Receipt from "./Components/Receipt";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+	constructor() {
+		super();
+			this.state = {
+			totalExpense: 0,
+			receiptCollection: [],
+			receiptCount: 0,
+
+		};
+	}
+
+	addReceipt = (e) => {
+		this.setState({
+			receiptCount: this.state.receiptCount + 1,
+		});
+	}
+
+	render() {
+		return (
+			<div>
+				<div className="total-expense">{this.state.totalExpense}</div>
+				<div>{this.state.receiptCount}</div>
+				<Receipt />
+				<button onClick={this.addReceipt} disabled={ this.state.receiptCount > 4 }>Add Receipt</button>
+
+			</div>
+		)
+	}
+
 }
 
 export default App;
